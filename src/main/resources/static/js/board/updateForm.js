@@ -13,23 +13,3 @@
   });
 
 
-///* 모달창 ---------------------------------------------*/
-//  const $editModal = document.getElementById('editModal');    //삭제 모달창
-//  const $clBtn = document.getElementById('clBtn');   //취소버튼 모달창
-//  const $editItemBtn = document.getElementById('editItemBtn'); //저장버튼 모달창
-//
-//  $editModal.addEventListener('close',evt=>{
-//    if($editModal.returnValue == 'ok'){
-//      location.href = `/boards/${uid}/edit`; // GET http://서버주소 or 서버도메인/boards/아이디/edit
-//    }
-//  });
-//
-//  //취소버튼 모달창
-//  $clBtn.addEventListener('click', evt=>{
-//    $editModal.close('cancel');
-//  });
-//
-//  //저장버튼 모달창
-//  $editItemBtn.addEventListener('click', evt=>{
-//    $editModal.close('ok');
-//  });
