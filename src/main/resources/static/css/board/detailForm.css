@@ -1,0 +1,38 @@
+h3 {
+  text-align: center;
+}
+form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+div {
+  margin-bottom: 10px;
+}
+label {
+  text-align: start;
+  display: inline-block;
+  width: 100px;
+  font-weight: bold;
+}
+input[type="text"] {
+  background-color: #ccc;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+#contents{
+  background-color: #ccc;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  min-height: 200px;
+}
+.btns{
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+}
+.btns input{
+  margin-left: 5px;
+ }

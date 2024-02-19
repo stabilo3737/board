@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글등록</title>
+  <style>
+    *{outline: 1px solid red;}
+    h3 {
+     text-align: center;
+    }
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    div {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: inline-block;
+      width: 90%;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      width: 75%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    /* #contents{
+      min-height: 200px;
+      width: 700px;
+    } */
+    textarea{
+      min-width: 75%;
+      min-height: 200px;
+    }
+    .btns{
+      display: flex;
+      justify-content: end;
+      margin-top: 20px;
+    }
+    .btns input{
+      margin-left: 5px;
+    }
+
+  </style>
+</head>
+<body>
+  <form action="/boards/add" method="post">
+  <div class="d1">
+  <h3>게시글 등록</h3>
+    <div><label for="title">제목</label><input id="title" name="title" type="text"></div>
+    <div><label for="contents">내용</label><textarea id="contents" name="contents" type="textarea"></textarea></div>
+    <div><label for="uname">작성자</label><input id="uname" name="uname" type="text"></div>
+  </div>  
+    <div class="btns">
+     <input type="reset" value="취소">
+     <input type="submit" value="저장">
+     <input type="button" value="목록" onclick="location.href='/boards'">
+    </div>
+  </form>
+</body>
+</html>

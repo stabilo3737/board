@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글 조회</title>
+  <link rel="stylesheet" href="/css/board/detailForm.css">
+  <script src="/js/board/detailForm.js" async></script>
+</head>
+<body>
+<h3>게시글 조회</h3>
+<form action="#" method="post">
+  <div><label for="userId">아이디</label><input id="userId" type="text" th:value="${board.userId}" readonly></div>
+  <div><label for="title">제목</label><input id="title" name="title" type="text" th:value="${board.title}" readonly></div>
+  <div><label for="contents">내용</label><input id="contents" name="contents" type="textarea" th:value="${board.contents}" readonly></div>
+  <div><label for="uname">작성자</label><input id="uname" name="uname" type="text" th:value="${board.uname}" readonly></div>
+  <div><label for="cdate">작성날짜</label><input id="cdate" name="cdate" type="text" th:value="${#temporals.format(board.cdate, 'yyyy년 MM월 dd일 a hh시 mm분')}" readonly></div>
+  <div class="btns">
+    <input id="modifyBtn" type="button" value="수정">
+    <input id="deleteBtn" type="button" value="삭제">
+    <input id="listBtn" type="button" value="목록">
+  </div>
+</form>
+<dialog id="delModal">
+  <p>삭제하시겠습니까?</p>
+  <form action="" method="dialog">
+    <button id="cancelBtn">취소</button>
+    <button id="delItemBtn">삭제</button>
+  </form>
+</dialog>
+</body>
+</html>

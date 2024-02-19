@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글 조회</title>
+</head>
+<style>
+  h3 {
+    text-align: center;
+  }
+  form {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  div {
+      margin-bottom: 5px;
+  }
+  label {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+  }
+  input[type="text"] {
+    background-color: #ccc;
+    width: 75%;
+    padding: 5px;
+    border-radius: 5px;
+   }
+  #contents{
+    min-height: 200px;
+  }
+  .btns{
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+  }
+  .btns input{
+    margin-left: 5px;
+  }
+</style>
+<body>
+<h3>게시글 조회</h3>
+<form action="#" method="post">
+  <div><label for="userId">아이디</label><input id="userId" type="text" th:value="${board.userId}" readonly></div>
+  <div><label for="title">제목</label><input id="title" name="title" type="text" th:value="${board.title}" readonly></div>
+  <div><label for="contents">내용</label><input id="contents" name="contents" type="text" th:value="${board.contents}" readonly></div>
+  <div><label for="uname">작성자</label><input id="uname" name="uname" type="text" th:value="${board.uname}" readonly></div>
+  <div class="btns">
+    <input id="modifyBtn" type="button" value="수정">
+    <input id="deleteBtn" type="button" value="삭제">
+    <input id="listBtn" type="button" value="목록">
+  </div>
+</form>
+<dialog id="delModal">
+  <p>삭제하시겠습니까?</p>
+  <form action="" method="dialog">
+    <button id="cancelBtn">취소</button>
+    <button id="delItemBtn">삭제</button>
+  </form>
+</dialog>
+<script>
+  const $modifyBtn = document.getElementById('modifyBtn');  //수정버튼
+  const $deleteBtn = document.getElementById('deleteBtn');  //삭제버튼
+  const $listBtn = document.getElementById('listBtn');      //목록버튼
+  const uid = document.getElementById('userId').value;      //유저아이디
+
+  //수정
+  $modifyBtn.addEventListener('click',e=>{
+    location.href=`/boards/${uid}/edit`; // GET http://서버주소 or 서버도메인/boards/아이디/edit
+  });
+
+  //삭제
+  $deleteBtn.addEventListener('click',e=>{
+    // if(!window.confirm('삭제하시겠습니까')) return;
+    $delModal.showModal();
+  });
+
+  //목록
+  $listBtn.addEventListener('click',e=>{
+    location.href = '/boards';      // GET http://서버주소 or 서버도메인/boards
+  }, false);
+
+
+  /* 모달창 ---------------------------------------------*/
+  const $delModal = document.getElementById('delModal');    //삭제 모달창
+  const $cancelBtn = document.getElementById('cancelBtn');   //취소버튼 모달창
+  const $delItemBtn = document.getElementById('delItemBtn'); //삭제버튼 모달창
+
+  $delModal.addEventListener('close',evt=>{
+    if($delModal.returnValue == 'ok'){
+      location.href = `/boards/${uid}/del`; // GET http://서버주소 or 서버도메인/boards/아이디/del
+    }
+  });
+
+  //취소버튼 모달창
+  $cancelBtn.addEventListener('click', evt=>{
+    $delModal.close('cancel');
+  });
+
+  //삭제버튼 모달창
+  $delItemBtn.addEventListener('click', evt=>{
+    $delModal.close('ok');
+  });
+  /*-----------------------------------------------------*/
+</script>
+</body>
+</html>

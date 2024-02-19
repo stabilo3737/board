@@ -1,0 +1,56 @@
+h3 {
+  text-align: center;
+}
+form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+div {
+  margin-bottom: 10px;
+}
+label {
+  text-align: start;
+  display: inline-block;
+  width: 100px;
+  font-weight: bold;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+#contents{
+background-color = black;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  min-height: 200px;
+}
+#userId{
+  background-color: #ccc;
+}
+.btns{
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+}
+.btns input{
+  margin-left: 5px;
+}
+input::placeholder,
+textarea::placeholder {
+  color:red;
+  font-size:0.8em;
+  font-style: italic;
+}
+.err-msg {
+  background-color: yellow;
+  display:none;
+  color:red;
+  font-size:0.8em;
+  font-style: italic;
+}
+.err-msg.on{
+  display:inline-block;
+}

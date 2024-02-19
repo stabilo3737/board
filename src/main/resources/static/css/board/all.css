@@ -1,0 +1,27 @@
+h2 {
+  text-align: center;
+}
+form {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+table {
+  width: 100%;
+}
+thead {
+  background-color: #f2f2f2;
+}
+td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+.row:hover {
+  background-color: #f2f2f2;
+}
+.chk {
+  width: 10%;
+}
+button{
+  margin-top: 10px;
+}

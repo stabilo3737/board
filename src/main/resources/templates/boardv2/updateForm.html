@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글 수정</title>
+</head>
+<style>
+  h3 {
+  text-align: center;
+  }
+  form {
+   max-width: 500px;
+   margin: 0 auto;
+  }
+  div {
+    margin-bottom: 5px;
+  }
+  label {
+    display: inline-block;
+    width: 100px;
+    font-weight: bold;
+  }
+  input[type="text"] {
+    width: 75%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  #contents{
+    min-height: 200px;
+  }
+  #userId{
+    background-color: #ccc;
+  }
+  .btns{
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+  }
+  .btns input{
+    margin-left: 5px;
+  }
+
+</style>
+<body>
+<h3>게시글 수정</h3>
+<!-- form.auction에 값이 없는경우 가장최근에 client 요청했던 url값으로 반영된다. -->
+<form action="#" method="post">
+  <div><label for="userId">아이디</label><input id="userId" type="text" th:value="${board.userId}" readonly></div>
+  <div><label for="title">제목</label><input id="title" name="title" type="text" th:value="${board.title}" ></div>
+  <div><label for="contents">내용</label><input id="contents" name="contents" type="text" th:value="${board.contents}" ></div>
+  <div><label for="uname">작성자</label><input id="uname" name="uname" type="text" th:value="${board.uname}" ></div>
+  <div class="btns">
+    <input id="cancelBtn" type="reset" value="취소">
+    <input id="updateBtn" type="submit" value="저장">
+    <input id="listBtn" type="button" value="목록">
+  </div>
+</form>
+<dialog id="editModal">
+  <p>수정하시겠습니까?</p>
+  <form action="" method="dialog">
+    <button id="clBtn">취소</button>
+    <button id="editItemBtn">수정</button>
+  </form>
+</dialog>
+
+<script>
+  const $listBtn = document.getElementById('listBtn');      //목록버튼
+  const $updateBtn = document.getElementById('updateBtn');  //저장버튼
+
+    //목록
+  $listBtn.addEventListener('click',e=>{
+    location.href = '/boards';      // GET http://서버주소 or 서버도메인/boards
+  }, false);
+
+   //수정
+  $updateBtn.addEventListener('click',e=>{
+    if(!window.confirm('수정하시겠습니까')) return;
+    $editModal.showModal();
+  });
+
+
+</script>
+</body>
+</html>
