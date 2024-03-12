@@ -6,9 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>게시글 조회</title>
   <link rel="stylesheet" href="/css/board/detailForm.css">
-  <script src="/js/board/detailForm.js" async></script>
+  <script th:inline="javascript">
+    window.totalCnt = [[${totalCnt}]];
+    window.cpgs = [[${cpgs}]];
+    window.cp = [[${cp}]];
+  </script>
+  <script type="module" src="/js/board/detailForm.js" async></script>
 </head>
 <body>
+<!-- 현재 게시글 번호 -->
+<input type="hidden" id="currentBnum" th:value="${board.userId}" />
+<!-- 현재 로그인한 사용자 아이디 -->
+<input type="hidden" id="currentUname" th:value="${session.loginMember.nickname}" />
 <h3>게시글 조회</h3>
 <form action="#" method="post">
   <div><label for="userId">아이디</label><input id="userId" type="text" th:value="${board.userId}" readonly></div>
@@ -22,6 +31,34 @@
     <input id="listBtn" type="button" value="목록">
   </div>
 </form>
+
+<h4>댓글</h4>
+<div class="d1">
+  <div class="c1">
+    <textarea id="comment" cols="30" rows="3"></textarea>
+    <button id="addBtn">등록</button> <!-- ID 수정 -->
+  </div>
+    <div id="commentErrMsg"></div>
+
+    <ul class="list">
+    <!-- 댓글채워넣기 -->
+    </ul>
+
+    <template id="readMode">
+      <li class="item read"><span class="reply"></span>
+        <button class="cmodifyBtn">수정</button><button class="cdelBtn">삭제</button>
+      </li>
+    </template>
+    <template id="modifyMode">
+      <li class="item modi">
+        <input type="text" style="width: 400px;"><button class="csaveBtn">저장</button><button class="ccancelBtn">취소</button>
+      </li>
+    </template>
+    <template id="err">
+      <p class="errmsg"></p>
+    </template>
+</div>
+
 <dialog id="delModal">
   <p>삭제하시겠습니까?</p>
   <form action="" method="dialog">
@@ -29,5 +66,9 @@
     <button id="delItemBtn">삭제</button>
   </form>
 </dialog>
+
+<!-- 페이징을 표시할 영역 -->
+<div id="pagination"></div>
+
 </body>
 </html>

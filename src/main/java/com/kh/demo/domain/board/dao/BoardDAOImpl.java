@@ -31,13 +31,13 @@ public class BoardDAOImpl implements BoardDAO {
   @Override
   public Long write(Board board) {
     StringBuffer sql = new StringBuffer();
-    sql.append("insert into Board(user_id,title,contents,uname) ");
-    sql.append("values(Board_user_id_seq.nextval, :title, :contents, :uname) ");
+    sql.append("insert into Board(user_id,title,contents,uname,email) ");
+    sql.append("values(Board_user_id_seq.nextval, :title, :contents, :uname, :email) ");
 
     // SQL파라미터 자동매핑
     SqlParameterSource param = new BeanPropertySqlParameterSource(board);
     KeyHolder keyHolder = new GeneratedKeyHolder();
-    template.update(sql.toString(),param,keyHolder,new String[]{"user_id","title","contents","uname"});
+    template.update(sql.toString(),param,keyHolder,new String[]{"user_id","title","contents","uname","email"});
     Long user_id = ((BigDecimal)keyHolder.getKeys().get("user_id")).longValue(); //유저아이디
     return user_id;
   }
@@ -46,7 +46,7 @@ public class BoardDAOImpl implements BoardDAO {
   @Override
   public Optional<Board> findById(Long userId) {
     StringBuffer sql = new StringBuffer();
-    sql.append("select user_id,title,contents,uname,cdate,udate ");
+    sql.append("select user_id,title,contents,uname, email,cdate,udate ");
     sql.append("  from board ");
     sql.append(" where user_id = :userId ");
 
@@ -96,6 +96,7 @@ public class BoardDAOImpl implements BoardDAO {
     sql.append("   set title = :title, ");
     sql.append("       contents = :contents, ");
     sql.append("       uname = :uname, ");
+    sql.append("       email = :email, ");
     sql.append("       udate = default ");
     sql.append(" where user_id = :userId ");
 
@@ -104,6 +105,7 @@ public class BoardDAOImpl implements BoardDAO {
             .addValue("title", board.getTitle())
             .addValue("contents", board.getContents())
             .addValue("uname",  board.getUname())
+            .addValue("email", board.getEmail())
             .addValue("userId", userId);
 
     //update수행 후 변경된 행수 반환
@@ -116,14 +118,38 @@ public class BoardDAOImpl implements BoardDAO {
   @Override
   public List<Board> findAll() {
     StringBuffer sql = new StringBuffer();
-    sql.append("  select user_id,title,contents,uname,cdate,udate ");
+    sql.append("  select user_id,title,contents,uname,email,cdate,udate ");
     sql.append("    from board ");
-    sql.append("order by user_id desc");
+    sql.append("   order by user_id asc ");
 
     List<Board> list = template.query(sql.toString(), BeanPropertyRowMapper.newInstance(Board.class));
 
     return list;
   }
 
+  //목록(페이징)
+  @Override
+  public List<Board> findAll(Long reqPage, Long recCnt) {
+    StringBuffer sql = new StringBuffer();
+    sql.append("  select user_id,title,contents,uname,cdate,udate ");
+    sql.append("    from board ");
+    sql.append("order by user_id asc ");
+    sql.append("offset (:reqPage - 1) * :recCnt rows fetch first :recCnt rows only ");
 
+    Map<String,Long> param = Map.of("reqPage",reqPage,"recCnt",recCnt);
+    List<Board> list = template.query(sql.toString(),param, BeanPropertyRowMapper.newInstance(Board.class));
+
+    return list;
+  }
+
+  //총레코드 건수
+  @Override
+  public int totalCnt() {
+    String sql = "select count(user_id) from board ";
+
+    SqlParameterSource param = new MapSqlParameterSource();
+    Integer cnt = template.queryForObject(sql, param, Integer.class);
+
+    return cnt;
+  }
 }

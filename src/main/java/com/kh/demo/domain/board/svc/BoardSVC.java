@@ -21,6 +21,12 @@ public interface BoardSVC {
   //목록
   List<Board> findAll();
 
+  //목록(페이징)
+  List<Board> findAll(Long reqPage, Long recCnt);
+
   //수정
   int updateById(Long userId, Board board);
+
+  //총레코드 건수
+  int totalCnt();
 }

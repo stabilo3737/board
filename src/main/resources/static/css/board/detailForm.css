@@ -1,9 +1,14 @@
-h3 {
+/* *{outline: 1px solid red;} */
+h3, h4 {
   text-align: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
 }
-form {
+form{
   max-width: 500px;
   margin: 0 auto;
+  margin-bottom: 30px;
 }
 div {
   margin-bottom: 10px;
@@ -16,7 +21,7 @@ label {
 }
 input[type="text"] {
   background-color: #ccc;
-  width: 100%;
+  width: 500px;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -35,4 +40,33 @@ input[type="text"] {
 }
 .btns input{
   margin-left: 5px;
- }
+}
+
+.d1{
+  margin-top: 20px;
+}
+
+.item {
+  text-align: center;
+}
+
+#comment{
+  width: 400px;
+  height: 25px;
+}
+
+ul.list {
+  list-style: none;
+  padding: 0;
+}
+
+ul.list .item {
+  margin-bottom: 10px;
+}
+
+.c1, .item .modi{
+  display: flex;
+  justify-content: center;
+}
+
+

@@ -4,10 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>게시글목록</title>
+  <title>게시글 목록</title>
   <link rel="stylesheet" href="/css/board/all.css">
-<!-- async: html dom트리 형성후 수행됨-->
-  <script src="/js/board/all.js" async></script>
+  <script th:inline="javascript">
+    window.totalCnt = [[${totalCnt}]];
+    window.cpgs = [[${cpgs}]];
+    window.cp = [[${cp}]];
+  </script>
+  <!-- async: html dom트리 형성후 수행됨-->
+  <script type="module" src="/js/board/all.js"></script>
 </head>
 <body>
 <h2>게 시 판</h2>
@@ -37,6 +42,6 @@
     <button type="button" id="addBtn">등록</button>
   </div>
 </form>
-
+  <div id="pagination"></div>
 </body>
 </html>

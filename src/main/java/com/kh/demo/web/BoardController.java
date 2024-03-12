@@ -68,6 +68,7 @@ public class BoardController {
     board.setTitle(addForm.getTitle());
     board.setContents(addForm.getContents());
     board.setUname(addForm.getUname());
+    board.setEmail(addForm.getEmail());
 
     Long userId = boardSVC.write(board);
 
@@ -164,14 +165,34 @@ public class BoardController {
     return "redirect:/boards/{uid}/detail";
   }
 
-  //목록
-  @GetMapping   // GET http://localhost:9080/boards
-  public String findAll(Model model){
+//  //목록
+//  @GetMapping   // GET http://localhost:9080/boards
+//  public String findAll(Model model){
+//
+//    List<Board> list = boardSVC.findAll();
+//    model.addAttribute("list", list);
+//
+//    return "board/all";
+//  }
 
-    List<Board> list = boardSVC.findAll();
+  //목록(페이징)
+  @GetMapping   // GET http://localhost:9080/boards?reqPage=2&reqCnt=10
+  public String findAllByPaging(
+          Model model,
+          @RequestParam(value = "reqPage", defaultValue = "1") Long reqPage, // 요청 페이지
+          @RequestParam(value = "reqCnt", defaultValue = "10") Long reqCnt,   // 레코드 수
+          @RequestParam(value = "cpgs", defaultValue = "1") Long cpgs,   //페이지 그룹 시작번호
+          @RequestParam(value = "cp", defaultValue = "1") Long cp   // 현재 페이지
+  ){
+
+    List<Board> list = boardSVC.findAll(reqPage, reqCnt);
+    int totalCnt = boardSVC.totalCnt();
+
     model.addAttribute("list", list);
+    model.addAttribute("totalCnt", totalCnt);
+    model.addAttribute("cpgs", cpgs);
+    model.addAttribute("cp", cp);
 
-    return "board/all";
+    return "board/allByPaging";
   }
-
 }

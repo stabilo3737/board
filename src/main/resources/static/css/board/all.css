@@ -25,3 +25,20 @@ td {
 button{
   margin-top: 10px;
 }
+
+#pagination button {
+    color : white;
+    background : blue;
+    border: none;
+    outline: none;
+    border-radius : 50%;
+    font-weight : bold;
+}
+#pagination button:hover{
+    cursor: pointer;
+    color : white;
+    background : pink;
+}
+#pagination button.active {
+    background : red;
+}

@@ -27,6 +27,7 @@ class BoardDAOImplTest {
     board.setTitle("제목테스트");
     board.setContents("내용테스트");
     board.setUname("작성자");
+    board.setEmail("user1@kh.com");
 
     Long userId = boardDAO.write(board);
   }
@@ -35,8 +36,8 @@ class BoardDAOImplTest {
   @Test
   @DisplayName("조회테스트")
   void findById() {
-    Long productId = 1L;
-    Optional<Board> findedBoard = boardDAO.findById(productId);
+    Long boardId = 4L;
+    Optional<Board> findedBoard = boardDAO.findById(boardId);
     Board board = findedBoard.orElse(null);
     log.info("board={}", board);
   }
@@ -55,11 +56,12 @@ class BoardDAOImplTest {
   @Test
   @DisplayName("수정테스트")
   void updateById() {
-    Long userId = 82L;
+    Long userId = 4L;
     Board board = new Board();
     board.setTitle("게시판수정테스트");
     board.setContents("게시판내용수정테스트");
-    board.setUname("작성자");
+    board.setUname("작성자1");
+    board.setEmail("user1@kh.com");
     int updatedRowCnt = boardDAO.updateById(userId, board);
     log.info("updatedRowCnt={}", updatedRowCnt);
 
@@ -74,5 +76,22 @@ class BoardDAOImplTest {
     }
 
   }
+
+  @Test
+  @DisplayName("게시판여러건등록")
+  void testWrite() {
+    long start = 1;
+    long end = 120;
+    for (long i = start; i <= end; i++) {
+      Board board = new Board();
+      board.setTitle("제목"+i);
+      board.setContents("내용"+i);
+      board.setUname("작성자");
+      board.setEmail("user1@kh.com");
+      Long boardId = boardDAO.write(board);
+    }
+  }
+
+
 }
 

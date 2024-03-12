@@ -13,6 +13,7 @@ public class Board {
   private String title;         //제목 varchar2(30),
   private String contents;      //내용 CONTENTS (clob)
   private String uname;         //작성자 UNAME	VARCHAR2(30 BYTE)
+  private String email;         //email varchar2(50)
   private LocalDateTime cdate;  //작성날짜 CDATE	TIMESTAMP(6)
   private LocalDateTime udate;  //수정날짜 UDATE	TIMESTAMP(6)
 }

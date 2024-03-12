@@ -6,4 +6,5 @@ public class AddForm {
   private String title;
   private String contents;
   private String uname;
+  private String email;
 }
